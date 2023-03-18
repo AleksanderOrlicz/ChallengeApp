@@ -13,35 +13,35 @@
 //8 => 0
 //9 => 0
 
-int[] allDigits = new int[10];
+string[] allDigits = new string[10];
 int[] howMany = new int[allDigits.Length];
 
-int number = 4566;
+int number = 67866;
 string numberInString = number.ToString();
 char[] digitsInNumber = numberInString.ToArray();
 //wypisanie tablicy cyfr 0-9
 for (int i = 0; i < allDigits.Length; i++)
 {
-    allDigits[i] = i;
+    allDigits[i] = i.ToString();
 }
 
 //
 foreach (char characters in digitsInNumber)
 {
-    foreach (int digit in allDigits)
+    for (int i =0; i < allDigits.Length; i++)
     {
-        if (digit == characters)
+        if (i.ToString() == characters.ToString())
         {
-            howMany[digit]++;
+            howMany[i]++;
         }
     }
     //Console.WriteLine(digit);
 }
 
 Console.WriteLine("Dla liczby: " + number);
-foreach (int digit in allDigits)
+for (int i = 0; i < allDigits.Length; i++)
 {
-    Console.WriteLine(allDigits[digit] + " => " + howMany[digit]);
+    Console.WriteLine(allDigits[i] + " => " + howMany[i]);
 }
 
 
