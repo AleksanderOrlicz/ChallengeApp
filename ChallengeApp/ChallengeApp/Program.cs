@@ -1,44 +1,47 @@
-﻿//-zadeklaruj zmienną z imieniem
-//- zadeklaruj zmienną z płcią (dobierz zmienną
-//-zadeklaruj zmienną z wiekiem
-//=zadeklaruj dane i wyświetlasz
-//jeden z komunikatów:
-// (1) "Kobieta poniżej 30 lat"
-// (2) "Ewa, lat 33"
-// (3) "Niepełnoletni Mężczyzna"
+﻿// Program, który polczy ile jakich cyfr występuje w podanej liczbie:
+//
+//Example"
+//Dla liczby: 4566
+//0 => 0
+//1 => 0
+//2 => 0
+//3 => 0
+//4 => 1
+//5 => 1
+//6 => 2
+//7 => 0
+//8 => 0
+//9 => 0
 
-string comment1 = "Kobieta poniżej 30 lat";
-string comment2 = "Ewa, lat 33";
-string comment3 = "Niepełnoletni Mężczyzna";
+int[] allDigits = new int[10];
+int[] howMany = new int[allDigits.Length];
 
-
-var name = "Anna";
-bool ifWoman = true;    // założenie istnienia dwóch płci ;)
-string gender;
-int age = 35;
-
-
-if (ifWoman == true && age < 30)
+int number = 4566;
+string numberInString = number.ToString();
+char[] digitsInNumber = numberInString.ToArray();
+//wypisanie tablicy cyfr 0-9
+for (int i = 0; i < allDigits.Length; i++)
 {
-    Console.WriteLine(comment1);
+    allDigits[i] = i;
 }
-else if (name == "Ewa" && age == 33)
+
+//
+foreach (char characters in digitsInNumber)
 {
-    Console.WriteLine(comment2);
-}
-else if (ifWoman != true && age < 18)
-{
-    Console.WriteLine(comment3);
-}
-else
-{
-    if (ifWoman == true)
+    foreach (int digit in allDigits)
     {
-        gender = "Kobieta";
+        if (digit == characters)
+        {
+            howMany[digit]++;
+        }
     }
-    else
-    {
-        gender = "Mężczyzna";
-    }
-    Console.WriteLine(name + " " + gender + " " + age + " lat");
+    //Console.WriteLine(digit);
 }
+
+Console.WriteLine("Dla liczby: " + number);
+foreach (int digit in allDigits)
+{
+    Console.WriteLine(allDigits[digit] + " => " + howMany[digit]);
+}
+
+
