@@ -1,47 +1,84 @@
-﻿// Program, który polczy ile jakich cyfr występuje w podanej liczbie:
-//
-//Example"
-//Dla liczby: 4566
-//0 => 0
-//1 => 0
-//2 => 0
-//3 => 0
-//4 => 1
-//5 => 1
-//6 => 2
-//7 => 0
-//8 => 0
-//9 => 0
+﻿/// 1. stwórz klasę Employee, w której przechowasz jego imie, nazwisko, wiek oraz punkty pracownika w postaci liczb całkowitych.
+///
+/// 2. Stwórz 3 pracowników i każdemu przydziel po 5 ocen z zakreesu od 1 do 10
+///
+/// 3. Napisz program, który wyszuka pracownika z najwyższą liczbą ocen a następnie wyświetli jego dane oraz wynkik
+using ChallengeApp;
 
-string[] allDigits = new string[10];
-int[] howMany = new int[allDigits.Length];
 
-int number = 67866;
-string numberInString = number.ToString();
-char[] digitsInNumber = numberInString.ToArray();
-//wypisanie tablicy cyfr 0-9
-for (int i = 0; i < allDigits.Length; i++)
+Random rnd = new();
+
+
+Employee employee1 = new Employee("Jan", "Kowalski", 35);
+Employee employee2 = new Employee("Anna", "Kowalik", 20);
+Employee employee3 = new Employee("Michał", "Madej", 55);
+
+
+
+List<Employee> listEmployees = new List<Employee>();
+List<Employee> bestEmployees = new List<Employee>();
+listEmployees.Add(employee1);
+listEmployees.Add(employee2);
+listEmployees.Add(employee3);
+
+
+
+int bestResult = 0;
+//Employee BestEmployee = null;
+
+
+for (int i = 0; i < 5; i++)
 {
-    allDigits[i] = i.ToString();
+    employee1.AddScore(rnd.Next(10));
+    employee2.AddScore(rnd.Next(10));
+    employee3.AddScore(rnd.Next(10));
 }
 
-//
-foreach (char characters in digitsInNumber)
+
+
+foreach (var employee in listEmployees)
 {
-    for (int i =0; i < allDigits.Length; i++)
+    if (employee.Result > bestResult)
     {
-        if (i.ToString() == characters.ToString())
-        {
-            howMany[i]++;
-        }
+        bestResult = employee.Result;//jakoś dodać żeby zliczało który employee ma tyle samo co max
+                                     //BestEmployee = employee;
     }
-    //Console.WriteLine(digit);
 }
 
-Console.WriteLine("Dla liczby: " + number);
-for (int i = 0; i < allDigits.Length; i++)
+foreach (var employee in listEmployees)
 {
-    Console.WriteLine(allDigits[i] + " => " + howMany[i]);
+    if (employee.Result == bestResult)
+    {
+        bestEmployees.Add(employee);
+    }
 }
+
+
+if (bestEmployees.Count == 1)
+{
+    Console.WriteLine("Pracownik z najlepszym wynikiem:");
+    foreach (var employee in bestEmployees)
+    {
+        employee.ShowEmployee();
+        employee.ShowResult();
+    }
+}
+else if (bestEmployees.Count > 1)
+{
+    Console.WriteLine("Pracownicy z najwyższą sumą ocen: " + bestEmployees.Count);
+    foreach (var employee in bestEmployees)
+    {
+        employee.ShowEmployee();
+        employee.ShowResult();
+        Console.WriteLine();
+    }
+}
+
+
+
+
+
+
+
 
 
