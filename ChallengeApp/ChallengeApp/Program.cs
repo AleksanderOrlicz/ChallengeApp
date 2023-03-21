@@ -22,9 +22,9 @@ int bestResult = 0;
 
 for (int i = 0; i < 5; i++)
 {
-    employee1.AddScore(rnd.Next(10));
-    employee2.AddScore(rnd.Next(10));
-    employee3.AddScore(rnd.Next(10));
+    employee1.AddScore(rnd.Next(1, 10));
+    employee2.AddScore(rnd.Next(1, 10));
+    employee3.AddScore(rnd.Next(1, 10));
 }
 
 foreach (var employee in listEmployees)
