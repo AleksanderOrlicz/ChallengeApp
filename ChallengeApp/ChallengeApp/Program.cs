@@ -5,27 +5,20 @@
 /// 3. Napisz program, który wyszuka pracownika z najwyższą liczbą ocen a następnie wyświetli jego dane oraz wynkik
 using ChallengeApp;
 
-
 Random rnd = new();
-
 
 Employee employee1 = new Employee("Jan", "Kowalski", 35);
 Employee employee2 = new Employee("Anna", "Kowalik", 20);
 Employee employee3 = new Employee("Michał", "Madej", 55);
 
-
-
 List<Employee> listEmployees = new List<Employee>();
 List<Employee> bestEmployees = new List<Employee>();
+
 listEmployees.Add(employee1);
 listEmployees.Add(employee2);
 listEmployees.Add(employee3);
 
-
-
 int bestResult = 0;
-//Employee BestEmployee = null;
-
 
 for (int i = 0; i < 5; i++)
 {
@@ -34,14 +27,11 @@ for (int i = 0; i < 5; i++)
     employee3.AddScore(rnd.Next(10));
 }
 
-
-
 foreach (var employee in listEmployees)
 {
     if (employee.Result > bestResult)
     {
-        bestResult = employee.Result;//jakoś dodać żeby zliczało który employee ma tyle samo co max
-                                     //BestEmployee = employee;
+        bestResult = employee.Result;
     }
 }
 
@@ -52,7 +42,6 @@ foreach (var employee in listEmployees)
         bestEmployees.Add(employee);
     }
 }
-
 
 if (bestEmployees.Count == 1)
 {

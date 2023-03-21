@@ -31,7 +31,7 @@ namespace ChallengeApp
         }
         public void ShowEmployee()
         {
-            Console.WriteLine(this.Name+ " "+this.Surname);
+            Console.WriteLine(this.Name + " " + this.Surname);
             Console.WriteLine("Wiek: " + this.Age);
         }
 
