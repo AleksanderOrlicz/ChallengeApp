@@ -24,7 +24,12 @@ namespace ChallengeApp
 
         public void AddScore(int number)
         {
-            score.Add(number);
+            score.Add(number);            
+        }
+
+        public void PenaltyScore(int number) 
+        {
+            score.Add(-number);
         }
     }
 }
