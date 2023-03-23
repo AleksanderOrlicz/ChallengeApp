@@ -50,7 +50,7 @@ namespace ChallengeApp.Tests
             user.AddScore(5);
             user.AddScore(5);
             user.AddScore(2);
-            user.AddScore(-10);
+            user.PenaltyScore(10);
 
             var result = user.Result;
 
