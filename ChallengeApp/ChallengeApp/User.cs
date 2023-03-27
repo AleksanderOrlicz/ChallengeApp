@@ -5,6 +5,11 @@ namespace ChallengeApp
     public class User
     {
         private List<int> score = new List<int>();
+        
+        public User(string name)
+        {
+            this.Login = name;
+        }
         public User(string name, string password)
         {
             this.Login = name;
