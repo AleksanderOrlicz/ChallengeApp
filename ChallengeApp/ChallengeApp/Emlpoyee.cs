@@ -1,4 +1,9 @@
-﻿
+﻿//Przygotować kilka metod na przyjęcie ocen w różnych formatach
+//AddGrade z różnymi typami parametrów,
+//ale ostatecznie wywołanie AddGrade(float)
+//double
+//long
+//inne typy
 
 namespace ChallengeApp
 {
@@ -15,10 +20,61 @@ namespace ChallengeApp
         public string Name { get; private set; }
         public string Surname { get; private set; }
 
-        public void AddGrade(float grade) 
+        
+
+        public void AddGrade(string grade)
         {
-            this.grades.Add(grade);
+            if (float.TryParse(grade, out float result))
+            {
+                this.AddGrade(result);
+            }
+            else
+            {
+                Console.WriteLine("String is not float");
+            }
         }
+
+        public void AddGrade(long grade)
+        {             
+            var gradeInFloat = (float)grade;
+            AddGrade(gradeInFloat);
+        }
+
+        public void AddGrade(double grade)
+        {
+            if (grade > float.MaxValue)
+            {
+                Console.WriteLine("Value is bigger than max float range");
+            }
+            else
+            {
+                var gradeInFloat = (float)grade;
+                AddGrade(gradeInFloat);
+            }
+        }
+
+        public void AddGrade(int grade)
+        {
+            var gradeInFloat = (float)grade;
+            AddGrade(gradeInFloat);
+        }
+        public void AddGrade(float grade)
+        {
+            
+            
+
+
+            if (grade >= 0 && grade <= 100)
+            {
+                this.grades.Add(grade);
+            }
+            else
+            {
+                Console.WriteLine("Invalid grade value");
+            }
+        }
+
+
 
         public Statistics GetStatistics()
         {
@@ -26,7 +82,7 @@ namespace ChallengeApp
             statistics.Average = 0;
             statistics.Max = float.MinValue;
             statistics.Min = float.MaxValue;
-            
+
             foreach (var grade in this.grades)
             {
                 statistics.Average += grade;
@@ -35,11 +91,11 @@ namespace ChallengeApp
             }
 
             statistics.Average /= this.grades.Count;
-            
+
 
             return statistics;
         }
-        
+
 
 
 

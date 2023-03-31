@@ -41,22 +41,19 @@
         }
 
         [Test]
-        public void WhenEmployeeGetsPenaltyGrades_ShouldReturnCorrectValues()
+        public void WhenEmployeeGetsGrades_ShouldReturnCorrectAverage()
         {
             var employee = new Employee("Jan", "Kowalski");
-            employee.AddGrade(3);
-            employee.AddGrade(-5);
-            employee.AddGrade(12);
-            employee.AddGrade(-8);
-            employee.AddGrade(5);
+            employee.AddGrade(2);
+            employee.AddGrade(2);
+            employee.AddGrade(6);
+            
 
 
             var statistics = employee.GetStatistics();
 
 
-            Assert.AreEqual(statistics.Average, 1.4f);
-            Assert.AreEqual(statistics.Max, 12);
-            Assert.AreEqual(statistics.Min, -8);
+            Assert.AreEqual(Math.Round(3.33, 2), Math.Round(statistics.Average, 2));            
         }
     }
 }
