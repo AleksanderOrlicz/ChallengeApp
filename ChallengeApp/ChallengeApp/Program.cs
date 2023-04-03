@@ -9,6 +9,10 @@ employee.AddGrade(double.MaxValue);
 employee.AddGrade(6.55555555555555555555f);
 employee.AddGrade(2);
 var statistics = employee.GetStatistics();
+var statistics2 = employee.GetStatisticsWithDoWhile();
+var statistics3 = employee.GetStatisticsWithWhile();
+var statistics4 = employee.GetStatisticsWithForEach();
+var statistics5 = employee.GetStatisticsWithFor();
 
 
 
