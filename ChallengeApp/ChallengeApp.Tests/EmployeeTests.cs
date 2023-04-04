@@ -1,4 +1,6 @@
-﻿namespace ChallengeApp.Tests
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ChallengeApp.Tests
 {
     internal class EmployeeTests
     {
@@ -57,75 +59,46 @@
         }
 
         [Test]
-        public void GetStatisticsWithForEach_ShouldReturnSameStatisticsAsGetStatistics()
+        public void WhenEmployeeGetsGradesAsLetters_ShouldReturnCorrectStatistics()
         {
-            var employee = new Employee("Jan", "Kowalski");
-            employee.AddGrade(2);
-            employee.AddGrade(2);
-            employee.AddGrade(6);
-
-
+            var employee = new Employee();
+            employee.AddGrade('A');
+            employee.AddGrade('B');
+            var realAverage = 90;
+            var min = 80;
+            var max = 100;
 
             var statistics = employee.GetStatistics();
-            var forEachStatistics = employee.GetStatisticsWithForEach();
 
-            Assert.AreEqual(statistics.Average, forEachStatistics.Average);
-            Assert.AreEqual(statistics.Max, forEachStatistics.Max);
-            Assert.AreEqual(statistics.Min, forEachStatistics.Min);
+            Assert.AreEqual(realAverage, statistics.Average);
+            Assert.AreEqual(min, statistics.Min);
+            Assert.AreEqual(max, statistics.Max);
         }
 
         [Test]
-        public void GetStatisticsWithFor_ShouldReturnSameStatisticsAsGetStatistics()
+        public void WhenEmployeeGetsGradesInStringFormat_ShouldReturnCorrectAverage()
         {
-            var employee = new Employee("Jan", "Kowalski");
-            employee.AddGrade(2);
-            employee.AddGrade(2);
-            employee.AddGrade(6);
-
-
+            var employee = new Employee();
+            employee.AddGrade("60");
+            employee.AddGrade("C");
+            employee.AddGrade("e");
 
             var statistics = employee.GetStatistics();
-            var forStatistics = employee.GetStatisticsWithFor();
 
-            Assert.AreEqual(statistics.Average, forStatistics.Average);
-            Assert.AreEqual(statistics.Max, forStatistics.Max);
-            Assert.AreEqual(statistics.Min, forStatistics.Min);
+            Assert.AreEqual(Math.Round(46.666666666d,2), Math.Round(statistics.Average, 2));
         }
 
         [Test]
-        public void GetStatisticsWithDoWhile_ShouldReturnSameStatisticsAsGetStatistics()
+        public void WhenemployeeGetsGrades_ShouldReturnCorrectAverageLetter()
         {
-            var employee = new Employee("Jan", "Kowalski");
-            employee.AddGrade(2);
-            employee.AddGrade(2);
-            employee.AddGrade(6);
-
-
+            var employee = new Employee();
+            employee.AddGrade("60");
+            employee.AddGrade("C");
+            employee.AddGrade("e");
 
             var statistics = employee.GetStatistics();
-            var doWhileStatistics = employee.GetStatisticsWithDoWhile();
 
-            Assert.AreEqual(statistics.Average, doWhileStatistics.Average);
-            Assert.AreEqual(statistics.Max, doWhileStatistics.Max);
-            Assert.AreEqual(statistics.Min, doWhileStatistics.Min);
-        }
-
-        [Test]
-        public void GetStatisticsWithWhile_ShouldReturnSameStatisticsAsGetStatistics()
-        {
-            var employee = new Employee("Jan", "Kowalski");
-            employee.AddGrade(2);
-            employee.AddGrade(2);
-            employee.AddGrade(6);
-
-
-
-            var statistics = employee.GetStatistics();
-            var whileStatistics = employee.GetStatisticsWithWhile();
-
-            Assert.AreEqual(statistics.Average, whileStatistics.Average);
-            Assert.AreEqual(statistics.Max, whileStatistics.Max);
-            Assert.AreEqual(statistics.Min, whileStatistics.Min);
+            Assert.That(statistics.AverageLetter, Is.EqualTo('C'));
         }
     }
 }
