@@ -7,7 +7,11 @@ Console.WriteLine("Oceny mogą być w prowadzane w formie liter:");
 Console.WriteLine("A => 100; B => 80; C => 60; D => 40; E => 20");
 Console.WriteLine();
 
-var employee = new Employee();
+var employee = new Employee("Michał", "Matczak", 'M', 22);
+Console.WriteLine(employee.Name);
+Console.WriteLine(employee.Surname);
+Console.WriteLine(employee.Sex);
+Console.WriteLine(employee.Age);
 
 while (true)
 {

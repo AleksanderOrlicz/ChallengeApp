@@ -1,29 +1,38 @@
-﻿namespace ChallengeApp
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace ChallengeApp
 {
-    public class Employee
+    public class Employee : Person
     {
-        //private const char sex = 'M';
-         
-
         private List<float> grades = new List<float>();
-
+        
         public Employee()
         {
         }
-        public Employee(string name, string surname)
-        {
-            this.Name = name;
-            this.Surname = surname;            
+        public Employee(string name)
+            : base(name)
+        {            
         }
 
-        public string Name { get; private set; }
-        public string Surname { get; private set; }
+        public Employee(string name, string surname)
+            : base(name, surname)
+        { 
+        }
 
+        public Employee(string name, string surname, char sex)
+            : base(name, surname, sex)
+        {
+        }
+
+        public Employee(string name, string surname, char sex, int age)
+            : base(name, surname, sex, age)
+        {
+        }
 
         public void AddGrade(float grade)
         {
             if (grade >= 0 && grade <= 100)
-            {                
+            {
                 this.grades.Add(grade);
             }
             else
@@ -95,10 +104,10 @@
             }
         }
 
-        
+
 
         public Statistics GetStatistics()
-        {            
+        {
             var statistics = new Statistics();
             statistics.Average = 0;
             statistics.Max = float.MinValue;
