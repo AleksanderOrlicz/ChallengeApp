@@ -9,7 +9,6 @@ Console.WriteLine();
 
 var employee = new Employee();
 
-
 while (true)
 {
     Console.WriteLine("Podaj kolejną ocenę pracownika: ");
@@ -18,7 +17,19 @@ while (true)
     {
         break; 
     }
-    employee.AddGrade(input);
+    try
+    {
+        employee.AddGrade(input);
+    }
+    catch(Exception exception)
+    {
+        Console.WriteLine($"Exception catched: {exception.Message}");
+    }
+    finally
+    {
+
+    }
+    
 }
 
 var statistics = employee.GetStatistics();

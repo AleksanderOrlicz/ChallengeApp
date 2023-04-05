@@ -2,22 +2,35 @@
 {
     public class Employee
     {
+        //private const char sex = 'M';
+         
+
         private List<float> grades = new List<float>();
 
         public Employee()
-        { 
+        {
         }
         public Employee(string name, string surname)
         {
             this.Name = name;
-            this.Surname = surname;
+            this.Surname = surname;            
         }
 
         public string Name { get; private set; }
         public string Surname { get; private set; }
 
 
-
+        public void AddGrade(float grade)
+        {
+            if (grade >= 0 && grade <= 100)
+            {                
+                this.grades.Add(grade);
+            }
+            else
+            {
+                throw new Exception("Invalid grade value");
+            }
+        }
         public void AddGrade(string grade)
         {
             if (float.TryParse(grade, out float result))
@@ -30,7 +43,7 @@
             }
             else
             {
-                Console.WriteLine("String is not float");
+                throw new Exception("String is not float");
             }
         }
 
@@ -78,23 +91,14 @@
                     this.grades.Add(20);
                     break;
                 default:
-                    Console.WriteLine("Wrong letter");
-                    break;
+                    throw new Exception("Wrong Letter");
             }
         }
-        public void AddGrade(float grade)
-        {
-            if (grade >= 0 && grade <= 100)
-            {
-                this.grades.Add(grade);
-            }
-            else
-            {
-                Console.WriteLine("Invalid grade value");
-            }
-        }
+
+        
+
         public Statistics GetStatistics()
-        {
+        {            
             var statistics = new Statistics();
             statistics.Average = 0;
             statistics.Max = float.MinValue;
@@ -114,7 +118,7 @@
             }
             statistics.Average /= this.grades.Count;
 
-            switch(statistics.Average)
+            switch (statistics.Average)
             {
                 case var average when average >= 80:
                     statistics.AverageLetter = 'A';
