@@ -1,5 +1,5 @@
 ﻿namespace ChallengeApp
-{   public abstract class Person : System.Object
+{   public abstract class Person
     {
         public Person()
             : this ("no name")
@@ -15,7 +15,6 @@
         {
             this.Name = name;
             this.Surname = surname;
-
         }
         public Person(string name, string surname, char sex)
             : this(name, surname, sex, 0)
@@ -30,8 +29,8 @@
             this.Surname = surname;
             this.Sex = sex;
             this.Age = age;
-
         }
+
         public string Name { get; private set; }
         public string Surname { get; private set; }
         public char Sex { get; private set; }

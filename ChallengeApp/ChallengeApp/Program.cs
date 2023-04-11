@@ -7,11 +7,10 @@ Console.WriteLine("Oceny mogą być w prowadzane w formie liter:");
 Console.WriteLine("A => 100; B => 80; C => 60; D => 40; E => 20");
 Console.WriteLine();
 
-var employee = new Employee("Michał", "Matczak", 'M', 22);
+var employee = new Employee("Michał", "Matczak");
+
 Console.WriteLine(employee.Name);
 Console.WriteLine(employee.Surname);
-Console.WriteLine(employee.Sex);
-Console.WriteLine(employee.Age);
 
 while (true)
 {
@@ -41,5 +40,31 @@ Console.WriteLine($"Average: {statistics.Average}");
 Console.WriteLine($"Min: {statistics.Min}");
 Console.WriteLine($"Max: {statistics.Max}");
 
+var supervisor = new Supervisor();
+while (true)
+{
+    Console.WriteLine("Podaj kolejną ocenę szefa: ");
+    var input = Console.ReadLine();
+    if (input == "q")
+    {
+        break;
+    }
+    try
+    {
+        supervisor.AddGrade(input);
+    }
+    catch (Exception exception)
+    {
+        Console.WriteLine($"Exception catched: {exception.Message}");
+    }
+    finally
+    {
+
+    }
+}
+var statistics2 = supervisor.GetStatistics();
+Console.WriteLine($"Average: {statistics2.Average}");
+Console.WriteLine($"Min: {statistics2.Min}");
+Console.WriteLine($"Max: {statistics2.Max}");
 
 
