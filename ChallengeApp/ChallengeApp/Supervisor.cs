@@ -38,7 +38,7 @@ namespace ChallengeApp
 
         public void AddGrade(char grade)
         {
-            switch(grade)
+            switch (grade)
             {
                 case 'A':
                 case 'a':
@@ -68,13 +68,13 @@ namespace ChallengeApp
 
         public void AddGrade(string grade)
         {
-            
+
 
             string pattern1 = @"^[1-6][\+-]$";
             string pattern2 = @"^[\+-][1-6]$";
             string pattern3 = @"^[1-6]$";
 
-            if(Regex.IsMatch(grade,pattern1) || Regex.IsMatch(grade,  pattern2) || Regex.IsMatch(grade, pattern3))
+            if (Regex.IsMatch(grade, pattern1) || Regex.IsMatch(grade, pattern2) || Regex.IsMatch(grade, pattern3))
             {
                 float modifier = 0;
 
@@ -86,41 +86,41 @@ namespace ChallengeApp
                 {
                     modifier = -5;
                 }
-                
+
                 char[] valueToTrim = { '-', '+' };
                 string trimmedGrade = grade.Trim(valueToTrim);
 
-                
 
-                    switch (trimmedGrade)
-                    {
-                        case "6":
-                            this.grades.Add(100+ modifier);
-                            break;
-                        case "5":
-                            this.grades.Add(80 + modifier);
-                            break;
-                        case "4":
-                            this.grades.Add(60 + modifier);
-                            break;
-                        case "3":
-                            this.grades.Add(40 + modifier);
-                            break;
-                        case "2":
-                            this.grades.Add(20 + modifier);
-                            break;
-                        case "1":
-                            this.grades.Add(0 + modifier);
-                            break;
-                        default:
-                            throw new Exception("Wrong grade");
-                    }                
+
+                switch (trimmedGrade)
+                {
+                    case "6":
+                        this.grades.Add(100 + modifier);
+                        break;
+                    case "5":
+                        this.grades.Add(80 + modifier);
+                        break;
+                    case "4":
+                        this.grades.Add(60 + modifier);
+                        break;
+                    case "3":
+                        this.grades.Add(40 + modifier);
+                        break;
+                    case "2":
+                        this.grades.Add(20 + modifier);
+                        break;
+                    case "1":
+                        this.grades.Add(0 + modifier);
+                        break;
+                    default:
+                        throw new Exception("Wrong grade");
+                }
             }
-            else if(float.TryParse(grade, out float result))
+            else if (float.TryParse(grade, out float result))
             {
                 this.AddGrade(result);
             }
-            else if(char.TryParse(grade, out char result2))
+            else if (char.TryParse(grade, out char result2))
             {
                 this.AddGrade(result2);
             }
@@ -130,7 +130,7 @@ namespace ChallengeApp
             }
 
 
-            
+
             // 6 => 100
             // 5 => 80
             // 4 => 60

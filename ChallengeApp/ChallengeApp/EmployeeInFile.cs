@@ -1,40 +1,36 @@
 ﻿namespace ChallengeApp
 {
-    public class Employee : IEmployee
+    public class EmployeeInFile : EmployeeBase
     {
-        private List<float> grades = new List<float>();
-        
-        //Emlpoyee constructor
-        
-        public Employee(string name, string surname)            
+        private const string fileName = "grades.txt";
+        public EmployeeInFile(string name, string surname)
+            : base(name, surname)
         {
-            this.Name = name;
-            this.Surname = surname; 
         }
 
-        public string Name { get; private set; }
-        public string Surname { get; private set; }
-
-        public void AddGrade(float grade)
+        public override void AddGrade(float grade)
         {
             if (grade >= 0 && grade <= 100)
             {
-                this.grades.Add(grade);
+                using (var writer = File.AppendText(fileName))
+                {
+                    writer.WriteLine(grade);
+                }
             }
             else
             {
-                throw new Exception("Invalid grade value");
+                throw new Exception("Invalid grade value!");
             }
         }
-        public void AddGrade(string grade)
+        public override void AddGrade(string grade)
         {
             if (float.TryParse(grade, out float result))
             {
-                this.AddGrade(result);
+                this.AddGrade((float)result);
             }
             else if (char.TryParse(grade, out char result2))
             {
-                this.AddGrade(result2);
+                this.AddGrade((char)result2);
             }
             else
             {
@@ -42,68 +38,82 @@
             }
         }
 
-        public void AddGrade(long grade)
+        public override void AddGrade(double grade)
         {
             var gradeInFloat = (float)grade;
             AddGrade(gradeInFloat);
         }
 
-        public void AddGrade(double grade)
-        {
-            var gradeInFloat = (float)grade;
-            AddGrade(gradeInFloat);
-
-        }
-
-        public void AddGrade(int grade)
+        public override void AddGrade(int grade)
         {
             var gradeInFloat = (float)grade;
             AddGrade(gradeInFloat);
         }
 
-        public void AddGrade(char grade)
+        public override void AddGrade(char grade)
         {
-            switch (grade)
+            string stringGrade = grade.ToString();
+            
+            char charGrade = char.Parse(stringGrade.ToUpper());
+            switch(grade)
             {
                 case 'A':
-                case 'a':
-                    this.grades.Add(100);
+                    this.AddGrade(100);
                     break;
                 case 'B':
-                case 'b':
-                    this.grades.Add(80);
+                    this.AddGrade(80);
                     break;
                 case 'C':
-                case 'c':
-                    this.grades.Add(60);
+                    this.AddGrade(60);
                     break;
                 case 'D':
-                case 'd':
-                    this.grades.Add(40);
+                    this.AddGrade(40);
                     break;
                 case 'E':
-                case 'e':
-                    this.grades.Add(20);
+                    this.AddGrade(20);
                     break;
                 default:
-                    throw new Exception("Wrong Letter");
+                    throw new Exception("Wrong character");
             }
         }
+              
 
-        //jak?
+        public override Statistics GetStatistics()
+        {
+            var gradesFromFile = this.StatisticsFromFile();
+            var statistics = this.GetStatisticsFromFile(gradesFromFile);
+            return statistics;
+            
+        }
 
-        public Statistics GetStatistics()
+        private List<float> StatisticsFromFile()
+        {
+            var gradesFromFile = new List<float>();
+            if(File.Exists(fileName))
+            {
+                using (var reader = File.OpenText(fileName))
+                {
+                    var line = reader.ReadLine();
+                    while (line != null)
+                    {
+                        var grade = float.Parse(line);
+                        gradesFromFile.Add(grade);
+                        line = reader.ReadLine();
+                    }
+                }                
+            }
+            return gradesFromFile;
+        }
+        
+        private Statistics GetStatisticsFromFile(List<float> grades)
         {
             var statistics = new Statistics();
             statistics.Average = 0;
             statistics.Max = float.MinValue;
             statistics.Min = float.MaxValue;
-
-            foreach (var grade in this.grades)
+            
+            foreach (var grade in grades) 
             {
-                //break
-                //continue
-                //goto                
                 if (grade >= 0)
                 {
                     statistics.Average += grade;
@@ -111,7 +121,7 @@
                     statistics.Min = Math.Min(statistics.Min, grade);
                 }
             }
-            statistics.Average /= this.grades.Count;
+            statistics.Average /= grades.Count;
 
             switch (statistics.Average)
             {
@@ -130,10 +140,9 @@
                 default:
                     statistics.AverageLetter = 'E';
                     break;
-
-
             }
             return statistics;
         }
+
     }
 }
