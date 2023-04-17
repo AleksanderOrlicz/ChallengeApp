@@ -3,6 +3,9 @@
     public class EmployeeInFile : EmployeeBase
     {
         private const string fileName = "grades.txt";
+
+        public override event GradeAddedDelegate GradeAdded;
+
         public EmployeeInFile(string name, string surname)
             : base(name, surname)
         {
@@ -15,6 +18,10 @@
                 using (var writer = File.AppendText(fileName))
                 {
                     writer.WriteLine(grade);
+                    if (GradeAdded != null)
+                    {
+                        GradeAdded(this, new EventArgs());
+                    }
                 }
             }
             else
@@ -90,7 +97,7 @@
         {
             var gradesFromFile = new List<float>();
             if(File.Exists(fileName))
-            {
+            {                
                 using (var reader = File.OpenText(fileName))
                 {
                     var line = reader.ReadLine();

@@ -8,44 +8,38 @@ Console.WriteLine("A => 100; B => 80; C => 60; D => 40; E => 20");
 Console.WriteLine();
 
 var employee = new EmployeeInFile("Michał", "Matczak");
-employee.AddGrade(0.5f);
-employee.AddGrade("A");
-employee.AddGrade("20");
-//employee.AddGrade("444");
-employee.AddGrade('E');
-
-var statistics = employee.GetStatistics();
-Console.WriteLine($"Pracownik {employee.Name} {employee.Surname}");
-Console.WriteLine($"Średnia ocen: {statistics.Average}");
-Console.WriteLine($"Max: {statistics.Max}");
-Console.WriteLine($"Min: {statistics.Min}");
+employee.GradeAdded += EmployeeGradeAdded;
 
 
-//Console.WriteLine(employee.Name);
-//Console.WriteLine(employee.Surname);
+void EmployeeGradeAdded(object sender, EventArgs args)
+{
+    Console.WriteLine("Dodano nowa ocenę dla pracownika");
+}
 
-//while (true)
-//{
-//    Console.WriteLine("Podaj kolejną ocenę pracownika: ");
-//    var input = Console.ReadLine();
-//    if (input == "q")
-//    {
-//        break; 
-//    }
-//    try
-//    {
-//        employee.AddGrade(input);
-//    }
-//    catch(Exception exception)
-//    {
-//        Console.WriteLine($"Exception catched: {exception.Message}");
-//    }
-//    finally
-//    {
+employee.AddGrade(0.6f);
 
-//    }
-    
-//}
+while (true)
+{
+    Console.WriteLine("Podaj kolejną ocenę pracownika: ");
+    var input = Console.ReadLine();
+    if (input == "q")
+    {
+        break;
+    }
+    try
+    {
+        employee.AddGrade(input);
+    }
+    catch (Exception exception)
+    {
+        Console.WriteLine($"Exception catched: {exception.Message}");
+    }
+    finally
+    {
+
+    }
+
+}
 
 //var statistics = employee.GetStatistics();
 //Console.WriteLine($"Average: {statistics.Average}");
