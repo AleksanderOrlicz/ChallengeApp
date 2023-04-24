@@ -16,7 +16,7 @@ void EmployeeGradeAdded(object sender, EventArgs args)
     Console.WriteLine("Dodano nowa ocenę dla pracownika");
 }
 
-employee.AddGrade(0.6f);
+//employee.AddGrade(0.6f);
 
 while (true)
 {
@@ -41,10 +41,10 @@ while (true)
 
 }
 
-//var statistics = employee.GetStatistics();
-//Console.WriteLine($"Average: {statistics.Average}");
-//Console.WriteLine($"Min: {statistics.Min}");
-//Console.WriteLine($"Max: {statistics.Max}");
+var statistics = employee.GetStatistics();
+Console.WriteLine($"Average: {statistics.Average}");
+Console.WriteLine($"Min: {statistics.Min}");
+Console.WriteLine($"Max: {statistics.Max}");
 
 //var supervisor = new Supervisor();
 //while (true)
